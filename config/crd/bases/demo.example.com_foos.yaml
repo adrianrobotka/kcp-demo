@@ -33,15 +33,15 @@ spec:
           metadata:
             type: object
           spec:
-            description: FooSpec defines the desired state of Foo
             properties:
               foo:
-                description: Foo is an example field of Foo. Edit foo_types.go to
-                  remove/update
                 type: string
             type: object
           status:
             description: FooStatus defines the observed state of Foo
+            properties:
+              message:
+                type: string
             type: object
         type: object
     served: true
