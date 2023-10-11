@@ -70,6 +70,13 @@ SHELL = /usr/bin/env bash -o pipefail
 .PHONY: all
 all: build
 
+.PHONY: start-kcp
+start-kcp:
+	./bin/kcp start --root-directory=kcp --authorization-always-allow-paths=/healthz,/livez,/readyz,/metrics
+
+kcp-config:
+	@echo "export KUBECONFIG=$$(pwd)/kcp/admin.kubeconfig"
+
 ##@ General
 
 # The help target prints out all targets with their descriptions organized
@@ -117,7 +124,12 @@ build: manifests generate fmt vet ## Build manager binary.
 
 .PHONY: run
 run: manifests generate fmt vet ## Run a controller from your host.
+	kubectl apply -f config/crd/bases
+	kubectl apply -f config/samples
 	go run ./main.go
+
+prom:
+	./bin/prometheus --config.file=prometheus.yml
 
 # If you wish built the manager image targeting other platforms you can use the --platform flag.
 # (i.e. docker build --platform linux/arm64 ). However, you must enable docker buildKit for it.

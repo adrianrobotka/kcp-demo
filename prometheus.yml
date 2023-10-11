@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: "kcp"
+    scheme: https
+    static_configs:
+      - targets: ["localhost:6443"]
+    tls_config:
+      insecure_skip_verify: true
+
+  # - job_name: 'operator'
+  #   static_configs:
+  #     - targets: ['localhost:8080']
