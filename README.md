@@ -2,6 +2,11 @@
 
 This demo project is created to reproduce a [KCP bug](https://github.com/kcp-dev/kcp/issues/3016).
 
+![KCP's increasing memory usage](./docs/kcp_memory_usage.png)
+![KCP's increasing number of goroutines](./docs/kcp_goroutines.png)
+
+I have run this setup for some hours and the mesurments kept their trendency.
+
 ## In this repo
 
 - I used OperatorSDK to scaffold the content of this repo
